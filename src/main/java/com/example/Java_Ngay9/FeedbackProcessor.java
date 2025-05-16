@@ -16,16 +16,20 @@ import java.util.stream.Collectors;
 public class FeedbackProcessor {
 
     private static final Predicate<CustomerFeedback> isSatisfied = feedback -> feedback.getRating() >= 4;
+
     private static final Consumer<CustomerFeedback> displayFeedback = System.out::println;
+
     private static final Function<CustomerFeedback, String> feedbackToString = feedback ->
             String.format("Customer ID: %d, Name: %s, Rating: %d, Comment: %s",
                     feedback.getCustomerId(), feedback.getName(), feedback.getRating(), feedback.getComment());
+
     private static final Supplier<List<CustomerFeedback>> fallbackData = () -> {
         List<CustomerFeedback> list = new java.util.ArrayList<>();
         list.add(new CustomerFeedback(9999, "Sample User", 5, "Sample Comment"));
         return list;
     };
 
+    // Xử lý phản hồi khách hàng
     public static void processFeedback(List<CustomerFeedback> feedbackList) {
         if (feedbackList == null || feedbackList.isEmpty()) {
             System.out.println("Danh sách phản hồi rỗng. Không có dữ liệu để xử lý.");
